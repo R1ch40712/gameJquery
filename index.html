@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game jQuery</title>
+    <style>
+        div {
+            width: 70px;
+            height: 70px;
+            background-color: silver;
+            border: 2px solid black;
+            padding: 0 10px;
+            float: left;
+            margin: 1px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Game "Kotak" jQuery</h2>
+    <p>Anda hanya memiliki 3x klik untuk menemukan kotak hijau</p>
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <div id="box3"></div>
+    <br style="clear:both">
+
+    <div id="box4"></div>
+    <div id="box5"></div>
+    <div id="box6"></div>
+    <br style="clear:both">
+
+    <div id="box7"></div>
+    <div id="box8"></div>
+    <div id="box9"></div>
+    <br style="clear:both">
+
+    <h3 id="hitung"></h3>
+    <h1 id="hasil"></h1>
+
+    <script src="jquery-3.6.4.js"></script>
+    <script>
+        $(document).ready(function () {
+            // generate angka random
+            var angka = Math.floor((Math.random() * 9) + 1);
+
+            // menambah awalan agar sesuai dengan id box
+            var box = 'box' + angka;
+
+            // siapkan variabel counter
+            var jumlah_klik = 0;
+            var ketemu = 'belum';
+
+            $('div').click(function () {
+                // hitung jumlah klik
+                jumlah_klik++;
+                $('#hitung').html('Jumlah klik: ' + jumlah_klik);
+
+                // change warna
+                if ($(this).attr('id') == box) {
+                    $(this).css('background-color', 'green');
+                    ketemu = 'sudah';
+                } else {
+                    $(this).css('background-color', 'red');
+                }
+
+                // cek hasil game
+                if ((ketemu == 'sudah') && (jumlah_klik <= 3)) {
+                    $('#hasil').html('You win!');
+                }
+                if ((ketemu == 'belum') && (jumlah_klik >= 3)) {
+                    $('#hasil').html('You lose...coba lagi bang!');
+                }
+            });
+        });
+
+
+
+
+    </script>
+</body>
+
+</html>
